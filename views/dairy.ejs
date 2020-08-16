@@ -103,7 +103,6 @@
       text-shadow: 0px -1px 0px #000000;
       -webkit-border-radius: 8px;
       border-radius: 8px;
-      border-top: 1px solid #FFF;
       -webkit-box-shadow: 0px 2px 14px #000;
       box-shadow: 0px 2px 14px #000;
       background-color: #62add6;
@@ -131,6 +130,7 @@
       margin-right: auto;
       margin-top: 24px;
       margin-bottom: 100px;
+      display:inline-flexbox;
     }
 
     #signout {
@@ -147,7 +147,6 @@
       text-shadow: 0px -1px 0px #000000;
       -webkit-border-radius: 8px;
       border-radius: 8px;
-      border-top: 1px solid #FFF;
       -webkit-box-shadow: 0px 2px 14px #000;
       box-shadow: 0px 2px 14px #000;
       background-color: red;
@@ -158,22 +157,34 @@
       cursor: pointer;
       margin-top: 20px;
       float: right;
-      height: 40px;
-      padding-left: 24px;
-      padding-right: 24px;
+      
       font-family: Arial, Helvetica, sans-serif;
       font-weight: bold;
       font-size: 20px;
-      color: #FFF;
       text-shadow: 0px -1px 0px #000000;
       -webkit-border-radius: 8px;
       border-radius: 8px;
-      border-top: 1px solid #FFF;
       -webkit-box-shadow: 0px 2px 14px #000;
       box-shadow: 0px 2px 14px #000;
-      background-color: cadetblue;
-
+       background-color:turquoise;
+       color:white;
     }
+    h1 {
+ font-family: 'Advent Pro';
+ font-size: 22px;
+ text-align: center;
+}
+small{
+  color: red;
+}
+p{
+  text-align: center;
+  font-family:'Lucida Sans';
+}
+#imgbtn{
+position: relative;
+}
+
   </style>
 
 <script >
@@ -186,28 +197,56 @@
 </head>
 
 <body>
+  <div class="anim">
+    <%if(data.view){%>
+      <p>TODAYS QUOTE</p>
+  <h1>" <%= data.quote %> "</h1>
+  <%}%>
+ </div>
   <div id="wrapper">
-    <form action="/login/logout" method="GET">
-      <button id="signout" name="signout" onclick="logout()">signout</button>
-    </form>
-    <form action="/login/" method="GET">
-      <button id="mydairies" name="mydairies">MyDairies</button>
-    </form>
-    <form id="paper" action="/login/data" method="POST">
+    
+    
+    <div class="dropdown" id="mydairies">
+      
+      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Menu
+      </button>
+      
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/get">My Dairies</a>
+        <a class="dropdown-item" href="/forgotPassword">Change Password</a>
+        <a class="dropdown-item" href="/signout">Logout</a>
+      </div>
+    </div>
+
+    <form id="paper"  action="/save" method="POST">
 
       <div id="margin">Title:<input id="title" type="text" name="title"></div>
+      <%if(data.e1){%>
+      <small> <%= data.e1 %> </small>
+    <%}%>
       <div id="margin"> Date: <input id="title1" type="date" name="date"></div>
-      <textarea placeholder="Start here..." id="text" name="text" rows="4"
-        style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>
+      <%if(data.e2){%>
+        <small> <%= data.e2 %> </small>
+      <%}%>
+      <label id="margin" for="img">Select image:</label>
+      <input type="file" id="img" class="btn btn-info" name="img" accept="image/*">
+      <textarea placeholder="Start here..." id="text" name="main" rows="4"
+        style="overflow: hidden; word-wrap: break-word; resize: none; height: 220px; "></textarea>
       <br>
+      <%if(data.e3){%>
+        <small> <%= data.e3 %> </small>
+      <%}%>
+    
       <input id="button" type="submit" value="Create">
 
     </form>
+   
 
   </div>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

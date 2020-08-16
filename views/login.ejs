@@ -4,6 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -27,7 +28,10 @@
             background-color: azure;
             align-content: center;
             float: center;
-background-image: url("https://img.icons8.com/officel/16/000000/hourglass.png")no-repeat;
+            text-align: center;
+
+            width:100%;
+            background-image: url("https://img.icons8.com/officel/16/000000/hourglass.png")no-repeat;
         }
 
         .form {
@@ -40,21 +44,21 @@ background-image: url("https://img.icons8.com/officel/16/000000/hourglass.png")n
             box-shadow: 0px 2px 14px #000;
             border-top: 1px solid #FFF;
             border-bottom: 1px solid #FFF;
-            position: absolute;
-             top: 150px; left: 500px;
+            position: relative;
+            top:20px;
             padding-left: 15px;
             padding-right: 15px;
             padding-top: 15px;
-            padding-bottom: 15px;
+            display: inline-block;
 
         }
         small{
             color:maroon;
         }
         .form2 {
-            
-            position: absolute;
-             top: 420px; left: 510px;
+            display: inline-block;
+            position: relative;
+            top:40px;
           
 
         }
@@ -63,33 +67,46 @@ background-image: url("https://img.icons8.com/officel/16/000000/hourglass.png")n
             color: navy;
             font-weight: bolder;
             text-align: center;
-            padding-top: 30px;
-            
+            position: relative;
+            padding-top: 10px;
+            color: aliceblue;
+            text-shadow: 1px 1px 2px black, 0 0 25px orangered, 0 0 5px darkblue;
         }
         h3{
             font-family:'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
             color:#000;
             font-weight: bold;
             text-align: center;
+            position: relative;
             padding-top: 10px;
             
         }
         .form-control{
+            position: relative;
+           
             -webkit-border-radius: 8px;
             border-radius: 8px;
         }
+      
     </style>
 </head>
 
 <body>
-    <h1 >WELCOME to your 𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</h1>
+    <br>
+    
+    <h1 >WELCOME to your 𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</h1> 
+    <%if(data.show){%>
+        <h1><%=data.show%><h1>
+            <%}%>
+        
     <h3> login to experience the fun </h3>
+    
     <form method="POST" action="/login">
-        <div class="form">
+        <div class="form" >
 
             <div>
-                <label>email</label>
-                <input class="form-control" name="email" id="email" type="email">
+                <label>Username</label>
+                <input class="form-control" name="username" id="username" type="name">
                 <%if(data.view){%>
                     <small><%=data.msg1%></small>
                     <% }%>
@@ -110,8 +127,14 @@ background-image: url("https://img.icons8.com/officel/16/000000/hourglass.png")n
        
     </form>
     <div class="form2">
-        <a  href="/public/register.html">create account</a>
+        <a  href="/signup?">Create a new account</a>
     </div>
+    <br>
+    <div class="form2">
+        <a href="/forgotpassword">Forget password?</a>
+    
+    </div>
+   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
