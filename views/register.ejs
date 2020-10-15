@@ -17,78 +17,95 @@
     <script type="text/JavaScript"></script>
     <script rel="text/JavaScript" href="E:\dairyweb\index.js"></script>
     <title>register page</title>
-    <style>
-        .btn btn-primary {
-            height: 20px;
-        }
+<style>
+    html,
+    body {
+        align-content: center;
+        float: center;
+        text-align: center;
+        background-color: #FFF;
+        width: 100%;
+        height: 100%;
 
-        body {
-            background-color: azure;
-            align-content: center;
-            text-align: center;
+    }
 
+    .register {
+        align-items: center;
+        align-content: center;
 
-        }
-        .form-control{
-            -webkit-border-radius: 8px;
-            border-radius: 8px;
-        }
-
-        .form {
-            background-color: cornsilk;
-            height: 400px;
-            width: 500px;
-            -webkit-border-radius: 12px;
-            border-radius: 12px;
-            -webkit-box-shadow: 0px 2px 14px #000;
-            box-shadow: 0px 2px 14px #000;
-            border-top: 1px solid #FFF;
-            border-bottom: 1px solid #FFF;
-            position: relative;
-            top:200px;
-            display:inline-block;
-            padding-left: 15px;
-            padding-right: 15px;
-            padding-top: 15px;
-            padding-bottom: 15px;
-
-        }
-        small{
-            color: red;
-        }
-    </style>
+    }
+</style>
 </head>
-
 <body>
-    <form method="POST" action="/signup">
-        <div class="form">
-            <div>
-                <label>name</label>
-                <input class="form-control" name="username" id="name" type="text">
-            </div>
-            <div>
-                <label>email</label>
-                <input class="form-control" name="email" id="email" type="email">
-            </div>
-            <div>
-                <label>password</label>
-                <input class="form-control" name="password" id="password" type="password" >
-                
 
+    <div class="container">
+
+<div class="row">
+
+    <div class="col">
+
+        <h1>Register your 𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐</h1>
+        <h1> account here!</h1>
+        <h3> Sign up with the basic information </h3>
+
+       
+                            
+                <br>
+                <br>
             </div>
-            <div>
-                <label> Confrim password</label>
-                <input class="form-control" id="cpassword" type="password" name="cpassword">
-                <small color="red"><%=data.msg%> </small>
+        
             </div>
-            <br>
-            <div>
-                <button type="submit" class="btn btn-info" id="signupbtn">register</button>
+
+        <div class="row justify-content-center">
+
+            <div class="col">
+                <div class="card" style="width: 21rem;">
+                    <div class="card-body">
+                        <form method="POST" action="/signup">
+                            <div class="register">
+                                <div>
+                                    <label>name</label>
+                                    <input class="form-control" name="username" id="name" type="text">
+                                </div>
+                                <div>
+                                    <label>email</label>
+                                    <input class="form-control" name="email" id="email" type="email">
+                                </div>
+                                <div>
+                                    <label>password</label>
+                                    <input class="form-control" name="password" id="password" type="password">
+
+
+                                </div>
+                                <div>
+                                    <label> Confrim password</label>
+                                    <input class="form-control" id="cpassword" type="password" name="cpassword">
+                                    <small color="red"><%=data.msg%> </small>
+                                </div>
+                                <br>
+                                <div>
+                                    <button type="submit" class="btn btn-info" id="signupbtn">register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+                <img src="noted.svg" class="img-fluid">
+
             </div>
         </div>
-    </form>
+
+
+    </div>
+
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -98,6 +115,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

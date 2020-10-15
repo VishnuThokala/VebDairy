@@ -22,10 +22,11 @@ var transporter = nodemailer.createTransport({
         pass: 'Vishnu1428'
     }
 });var app = express()
-app.use(express.static("public/images"));
 app.use(bodyParser.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+app.use(express.static(__dirname + '/public/images'));
+
 
  
 //&useNewUrlParser=true&useUnifiedTopology=false
@@ -86,6 +87,10 @@ app.get("/signup?", (req, res)=> {
 });
 app.get('/login', isLoggedIn, function (req, res) {
     res.render('dairy',{ data: { view: false } })
+})
+app.get('/home', (req, res) => {
+    res.render('dairy', { data: { view: false } })
+
 })
 app.post("/signup", function (req, res) {
 
