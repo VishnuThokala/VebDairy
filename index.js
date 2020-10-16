@@ -19,7 +19,7 @@ var transporter = nodemailer.createTransport({
     auth: {
         //giving the mail details through which the mail should be sent agfter signed up
         user: 'yourwebdairy@gmail.com',
-        pass: 'Vishnu1428'
+        pass: 'Vebdairy1428'
     }
 });var app = express()
 app.use(bodyParser.urlencoded({ extended: true }));
