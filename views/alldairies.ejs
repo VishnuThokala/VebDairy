@@ -18,7 +18,6 @@
       border: none;
       margin: 0px;
       padding: 0px;
-      font-family: Courier, monospace;
     }
 
     html,
@@ -186,36 +185,39 @@
 </script>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light mystyle">
-    <a class="navbar-brand" href="#">VebDairy</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-light mystyle">
+      <a class="navbar-brand" href="#">
+        <h5 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h5>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="/home">Home </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#"> My Dairies<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Settings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/forgotPassword">Change Password</a>
+            </div>
+          </li>
+    
+        </ul>
+        <a class="nav-link" href="/logout">Logout</a>
+    
+      </div>
+    </nav>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
-          <a class="nav-link" href="/home">Home</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#"> My Dairies<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Settings
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/forgotPassword">Change Password</a>
-          </div>
-        </li>
-
-      </ul>
-      <a class="nav-link" href="/logout">Logout</a>
-
-    </div>
-  </nav>
   <div class="container">
 
     <div id="wrapper">

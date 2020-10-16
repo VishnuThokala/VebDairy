@@ -18,7 +18,7 @@
     <script type="text/JavaScript" href='E:\dairyweb\index.js'></script>
 
 
-    <title>login page</title>
+    <title>Sign In</title>
     <style>
        
 
@@ -48,9 +48,10 @@
 
             <div class="col">
 
-                <h1>WELCOME to your </h1>
-                    <h1> 𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</h1>
-                   <h3> Life is like a blank page; it's built up as you go along </h3>
+                <h1><span style="color:turquoise;">WELCOME </span>to your </h1>
+                    <h1 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h1>
+                   <h3> Life is like a blank page;</h3>
+                <h3>  it's built up as you go along </h3>
 
                 <%if(data.show){%>
                 <h1><%=data.show%><h1>
@@ -73,6 +74,9 @@
                 </div>
                 <div class="col">
                 <div class="card" style="width: 21rem;">
+                    <br>
+                    <h3><small><span style="color:turquoise;"> Login here </span></small></h3>
+                    <br>
                     <div class="card-body">
                         <form method="POST" action="/login">
                         
@@ -103,14 +107,15 @@
                         </div>
                         <br>
                         <div class="form2">
-                            <a href="/forgotpassword">Forget password?</a>
+                            <a href="/forgotpassword">Forgot password?</a>
                         
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-    
+    <br>
+    <br>
 <div class="row">
     <div class="col alert alert-success">
 
