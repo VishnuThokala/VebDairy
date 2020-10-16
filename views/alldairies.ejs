@@ -160,6 +160,7 @@
       padding-top: 25px;
       border-radius: 15px;
       border-top: #62add6;
+      border: #000 5px solid;
     }
 
     .card-title {
@@ -177,12 +178,7 @@
     }
   </style>
 </head>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#title').focus();
-    $('#text').autosize();
-  });
-</script>
+
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light mystyle">
@@ -234,18 +230,26 @@
       <br>
       <br>
       <% if(data.viewone){%>
-      <div class="card mb-3" style="width: 540px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
+        <div class="row">
+          <div class="col">
+
+        
+      <div class="card " style="width: 540px;">
+        <div class="row ">
+          <div class="col">
+           
             <%if(data.results.img.data){%>
-            <img class="card-img-" width="100%" height="250" src="<%=data.result.img%>" alt="Card image">
+            <img class="card-img" width="100%" height="250" src="<%=data.result.img%>" alt="Card image">
             <%}%>
                   <%if(!data.results.img){%>
-            <img class="card-img-" width="100%" height="250"
+            <img class="card-img" width="100%" height="250"
               src="https://image.freepik.com/free-vector/life-is-journey-enjoy-ride_68166-194.jpg" alt="Card image">
             <%}%>
-              </div>
-                  <div class="col-md-8">
+          </div>
+        </div>
+        <div class="row">
+
+                  <div class="col">
                     <div class="card-body">
                       <h4 class="card-title" ><%=data.results.title%></h4>
             <p class="card-text"> <%=data.results.date%></p>
@@ -254,33 +258,42 @@
         </div>
       </div>
     </div>
+    </div>
     <% }%>
-
+  </div>
+  </div>
     <% if(data.view){%>
-    <h1>MyDairies</h1>
+    <h1 class="alert alert-info" style="text-align: center;">MyDairies</h1>
+<div class="row justify-content-center">
     <%for(var i=0;i!=data.result.length;i++){%>
+       
 
-    <div class="card mb-3" style="width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
+    <div class="card col-sm6" style="width: 540px;">
+      <div class="row ">
+        <div class="col">
           <%if(data.result[i].img){%>
-          <img class="card-img-" width="100%" height="250" src="<%=data.result[i].img%>" alt="Card image">
+          <img class="card-img" width="100%" height="250" src="<%=data.result[i].img%>" alt="Card image">
           <%}%>
                <%if(!data.result[i].img){%>
-          <img class="card-img-" width="100%" height="250"
+          <img class="card-img" width="100%" height="250"
             src="https://image.freepik.com/free-vector/life-is-journey-enjoy-ride_68166-194.jpg" alt="Card image">
           <%}%>
            </div>
-               <div class="col-md-8">
+           </div>
+           <div class="row">
+               <div class="col">
                  <div class="card-body">
                    <h4 class="card-title" ><%=data.result[i].title%></h4>
           <p class="card-text"> <%=data.result[i].date%></p>
           <p class="card-text1" class="card-text"><%=data.result[i].main%></p>
         </div>
       </div>
+      </div>
     </div>
-  </div>
+  
   <% }%>
+  </div>
+  
   <% }%>
 
   </div>

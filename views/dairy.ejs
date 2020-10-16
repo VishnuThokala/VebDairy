@@ -194,16 +194,16 @@ position: relative;
 
   </style>
 
-<script >
 
-  $(document).ready(function () {
-    $('#title').focus();
-    autosize($('#text'));
-  });
-</script>
 </head>
 
 <body>
+ 
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+
+
+
   <nav class="navbar navbar-expand-lg navbar-light mystyle">
   <a class="navbar-brand" href="#"><h1 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h1>
 </a>
@@ -245,7 +245,7 @@ position: relative;
     
   
 
-    <form id="paper" class="form-group" action="/save" method="POST">
+    <form id="paper" class="form-group"  action="/save" method="POST">
 
       <div id="margin">Title:<input id="title" type="text" name="title"></div>
       <%if(data.e1){%>
@@ -259,7 +259,10 @@ position: relative;
 
       <label id="margin" for="img">Select image:</label>
       <input type="file" id="img" class="btn btn-info" name="img" accept="image/*">
+
+      <button class='btn btn-info' type="button" onclick="addImage()">Upload</button>
       <br>
+      <input id="url" type="text" name="url" hidden>
       <br>
 
       <textarea placeholder="Start here..." id="text" name="main" rows="8"
@@ -270,7 +273,7 @@ position: relative;
       <%}%>
           <br>
 
-      <input class="btn btn-primary" type="submit" value="Create">
+      <input class="btn btn-primary" type="submit" value="Create" >
 
     </form>
    
@@ -278,7 +281,62 @@ position: relative;
   
 
   </div>
-  
+  <script>
+
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyCidnoUvjND6LTd1EuuE1lanekGzEPpmJE",
+      authDomain: "dairyweb-3dca5.firebaseapp.com",
+      databaseURL: "https://dairyweb-3dca5.firebaseio.com",
+      storageBucket: "dairyweb-3dca5.appspot.com",
+    };
+    firebase.initializeApp(firebaseConfig);
+    function addImage() {
+      var file = document.getElementById('img').files[0];
+      var imageName = file.name;
+
+
+      var metadata = {
+        contentType: 'image/jpeg'
+      };
+      
+      var storageRef = firebase.storage().ref();
+
+      var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function (snapshot) {
+          var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED:
+              console.log('Upload is paused');
+              break;
+            case firebase.storage.TaskState.RUNNING:
+              console.log('Upload is running');
+              break;
+          }
+        }, function (error) {
+
+
+          switch (error.code) {
+            case 'storage/unauthorized':
+              break;
+
+            case 'storage/canceled':
+              break;
+            case 'storage/unknown':
+              break;
+          }
+        }, function () {
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            console.log('File available at', downloadURL);
+            document.getElementById("url").value = downloadURL;
+            return downloadURL;
+          });
+        });
+    }
+  </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

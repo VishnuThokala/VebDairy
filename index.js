@@ -1,5 +1,4 @@
 var express = require('express')
-var bodyParser = require('body-parser')
 var passport = require('passport')
 const request = require('request');
 var passportLocalStrategy = require('passport-local').Strategy;
@@ -8,9 +7,10 @@ var User = require('./models/user');
 var Dairy = require('./models/dairySchema')
 var nodemailer = require('nodemailer');
 var randomstring = require("randomstring");
-
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 var bcrypt = require('bcrypt')
-
 const port = process.env.PORT || 3000;
 
 
@@ -22,6 +22,8 @@ var transporter = nodemailer.createTransport({
         pass: 'Vebdairy1428'
     }
 });var app = express()
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -76,6 +78,7 @@ passport.deserializeUser((id, done) => {
         done(err, docs);
     });
 });
+
 
 
 app.get('/' ,(req,res)=>{
@@ -168,8 +171,9 @@ app.post("/login", function (req, res) {
 }
 )
 
-app.post('/save', isLoggedIn,(req,res)=>{
-    
+app.post('/save', isLoggedIn, (req, res) => {
+ 
+       
     
     if(!req.body.title){
         console.log("title null")
@@ -187,7 +191,6 @@ app.post('/save', isLoggedIn,(req,res)=>{
     }
     else{
 
-        console.log(req)
         var d = Date(Date.now()); 
         a = d.toString() 
     var myDairy =new Dairy({
@@ -199,7 +202,7 @@ app.post('/save', isLoggedIn,(req,res)=>{
             id:req.user._id,
             username:req.user.username,
         },
-        // img: req.files.img ,
+        img: req.body.url,
     });
     
             myDairy.save((err)=>{
@@ -231,8 +234,8 @@ app.post('/getone',isLoggedIn,(req,res)=>{
         if (err) {
             console.log(err);
         } else {
-            console.log(user.dairies)
-            res.render('alldairies',{data:{view:true , result:user.dairies }})
+
+            res.render('alldairies', { data: { view: true, result: user.dairies } })
         }
     })
     
