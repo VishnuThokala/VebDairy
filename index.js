@@ -19,12 +19,12 @@ var transporter = nodemailer.createTransport({
     auth: {
         //giving the mail details through which the mail should be sent agfter signed up
         user: 'yourwebdairy@gmail.com',
-        pass: 'Vebdairy1428'
+        pass: 'Vardhanreddy1428'
     }
 });var app = express()
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 app.use(express.static(__dirname + '/public/images'));
@@ -155,10 +155,12 @@ app.post("/login", function (req, res) {
                               console.log(err)
                               res.render('login', { data: { view: true, msg: err } })
                           } else {
-                            request('https://favqs.com/api/qotd', { json: true }, (err, result, body) => {
-                              if (err) { return console.log(err); }
-                              res.render('dairy' ,{data:{view : true ,quote : body.quote.body}});
-                            });
+                              res.render('dairy', { data: { view: true, quote: "Be happy" } });
+
+                            // request('https://favqs.com/api/qotd', { json: true }, (err, result, body) => {
+                            //   if (err) { return console.log(err); }
+                            //   res.render('dairy' ,{data:{view : true ,quote : body.quote.body}});
+                            // });
                             
                             
                           }
@@ -252,8 +254,6 @@ app.get('/getall' ,isLoggedIn,(req,res)=>{
             res.render('alldairies',{data:{view:true , result:user.dairies }})
         }
     })
-    
-
 })
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -327,6 +327,7 @@ app.post("/newPassword", function (req, res) {
         }
     })
 })
+
 app.get('/reset/:token', (req, res) => {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
         if (!user) {
