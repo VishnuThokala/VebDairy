@@ -12,14 +12,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 var bcrypt = require('bcrypt')
 const port = process.env.PORT || 3000;
-
+require('dotenv').config()
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         //giving the mail details through which the mail should be sent agfter signed up
-        user: 'yourwebdairy@gmail.com',
-        pass: 'Vardhanreddy1428'
+        user: process.env.EMAIL,
+        pass:process.env.PASSWORD, 
     }
 });var app = express()
 app.use(cors());
@@ -29,12 +29,11 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 app.use(express.static(__dirname + '/public/images'));
 
-
  
 //&useNewUrlParser=true&useUnifiedTopology=false
 
 
-mongoose.connect('mongodb+srv://vishnu:vishnu@cluster0-fswia.gcp.mongodb.net/test?retryWrites=true&w=majority', 
+mongoose.connect(process.env.DB_URL,
 { useNewUrlParser: true , useUnifiedTopology:true ,useCreateIndex:true,}).then(() => { console.log("successful db connection") }).catch((err) => { console.log(err) });
 mongoose.set('useFindAndModify', false);
 app.set("view engine", 'ejs');
@@ -297,7 +296,7 @@ app.post("/newPassword", function (req, res) {
 
                 //sending email after successfully signedup
                 const mailOptions = {
-                    from: 'yourwebdairy@gmail.com', // sender address
+                    from: process.env.EMAIL, // sender address
                     to: user.email, // list of receivers
                     subject: 'Password Reset link has been shared to you !', // Subject line
                     text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
@@ -361,7 +360,7 @@ app.post('/updatePassword/:token', (req, res) => {
                     }
                     else {
                         const mailOptions = {
-                            from: 'yourwebdairy@gmail.com', // sender address
+                            from: process.env.EMAIL, // sender address
                             to: user.email, // list of receivers
                             subject: 'Password Updataion', // Subject line
                             text: 'Your Password for the account ' + user.username +' has been sucessfully updated \n\n'+
