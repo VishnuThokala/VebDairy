@@ -154,12 +154,12 @@ app.post("/login", function (req, res) {
                               console.log(err)
                               res.render('login', { data: { view: true, msg: err } })
                           } else {
-                              res.render('dairy', { data: { view: true, quote: "Be happy" } });
 
-                            // request('https://favqs.com/api/qotd', { json: true }, (err, result, body) => {
-                            //   if (err) { return console.log(err); }
-                            //   res.render('dairy' ,{data:{view : true ,quote : body.quote.body}});
-                            // });
+                            request('https://zenquotes.io/api/random', { json: true }, (err, result, body) => {
+                              if (err) { return console.log(err); }
+                            //   console.log(body[0].q)
+                              res.render('dairy' ,{data:{view : true ,quote : body[0].q}});
+                            });
                             
                             
                           }
