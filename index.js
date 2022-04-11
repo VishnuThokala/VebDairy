@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public/images'));
 //&useNewUrlParser=true&useUnifiedTopology=false
 
 
-mongoose.connect(process.env.DB_URL,
+mongoose.connect('mongodb+srv://vishnu:vishnu@cluster0.fswia.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 { useNewUrlParser: true , useUnifiedTopology:true ,useCreateIndex:true,}).then(() => { console.log("successful db connection") }).catch((err) => { console.log(err) });
 mongoose.set('useFindAndModify', false);
 app.set("view engine", 'ejs');
