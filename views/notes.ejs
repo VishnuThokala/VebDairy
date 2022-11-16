@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>Dairy</title>
+  <style>
+     html,body {
+      align-content: center;
+            float: center;
+            text-align: center;
+            background-color: rgb(2, 19, 49);
+            width: 100%;
+            height: 100%;     
+             
+    }
+  .mystyle{
+  background-color:white;
+  color: rgb(2, 2, 24);
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  margin-bottom: 50px;
+}
+  .text-title {
+    align-self: center;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 0%;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.text-area {
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    text-align: center;
+}
+
+
+.color-black {
+    height: 50px;
+    width: 50px;
+    color: black;
+}
+
+.text-formatting {
+    text-align: left;
+    padding-left: 1.2%;
+}
+
+.text-formatting button {
+    width: 30px;
+    padding: 0%;
+}
+
+.text-formatting select {
+    padding: 0%;
+}
+
+.text-title {
+    width: 300;
+    margin: auto;
+    display: block;
+}
+
+.form-control {
+    padding: 1%;
+}
+
+.box {
+    padding: 1%;
+}
+
+.box-body {
+    margin: auto;
+    display: block;
+    border-style: solid;
+    border-radius: 20px;
+    width: 80%;
+    height: 60%;
+    padding: 0.5%;
+    text-align: center;
+}
+
+.bar {
+    padding: 1%;
+}
+
+.leftbtn {
+    float: left;
+    text-align: left;
+    
+}
+
+.rightbtn {
+    float: right;
+    text-align: right;
+}
+
+
+
+.container-fluid {
+    background-color: #464159;
+    color: whitesmoke;
+}
+
+.glyphicon {
+    color: black;
+}
+h1 {
+ font-family: 'Advent Pro';
+ font-size: 22px;
+ text-align: center;
+}
+  </style>
+
+
+</head>
+
+<body>
+ 
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light mystyle">
+  <a class="navbar-brand" href="#"><h1 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h1>
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/dairy">Write Dairy</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Notes <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/get"> My Dairies</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/forgotPassword">Change Password</a>
+        </div>
+      </li>
+      
+    </ul>
+              <a class="nav-link" href="/logout">Logout</a>
+
+  </div>
+</nav>
+ 
+  <div class="box">
+      <div class="box-body">
+          <form action="/notes/add" method="POST">
+
+              <div class="text-title">
+                  <input class="form-control" id="title" name="title"
+                      placeholder="Title"></input>
+              </div>
+
+              <div class="text-area">
+                  <textarea class="form-control" name="text" rows="12" cols="175" id="body"
+                      placeholder="Your Note"></textarea>
+              </div>
+              <div class="bar">
+                  <button class="btn btn-primary" type="submit">
+                      SAVE
+                  </button> <br>
+              </div>
+
+      </form>
+</div>
+
+</div>
+<% if(data.view){%>
+  <!-- <h1 class="alert alert-info" style="text-align: center;">MyDairies</h1> -->
+<div class="row justify-content-center">
+  <%for(var i=0;i!=data.result.length;i++){%>
+     
+
+  <div class="card col-sm6" style="width: 540px;">
+    <div class="row ">
+         </div>
+         <div class="row">
+             <div class="col">
+               <div class="card-body">
+                <form action="/notes/<%= data.result[i]._id %>" method="GET">
+
+                  <h4 class="card-title" ><%=data.result[i].title%></h4>
+                  <!-- <p class="card-text1" class="card-text"><%=data.result[i].text%></p> -->
+                  
+                  <button type="submit" class="btn btn-warning"
+                      style="width: 75px; height:40px;">open</button>
+              </form>
+                
+      </div>
+    </div>
+    </div>
+  </div>
+
+<% }%>
+</div>
+
+<% }%>
+
+
+</body>
+
+</html>

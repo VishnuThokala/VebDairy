@@ -18,14 +18,17 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         //giving the mail details through which the mail should be sent agfter signed up
-        user: process.env.EMAIL,
-        pass:process.env.PASSWORD, 
+        user: "yourwebdairy@gmail.com",
+        pass:"ovszimonirfgbqrp", 
     }
-});var app = express()
+});
+
+var app = express()
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
+const Note = require('./models/Note');
 mongoose.Promise = global.Promise;
 app.use(express.static(__dirname + '/public/images'));
 
@@ -33,10 +36,12 @@ app.use(express.static(__dirname + '/public/images'));
 //&useNewUrlParser=true&useUnifiedTopology=false
 
 
-mongoose.connect('mongodb+srv://vishnu:vishnu@cluster0.fswia.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://vishnu:vishnu@cluster0.10rdy4r.mongodb.net/web?retryWrites=true&w=majority',
 { useNewUrlParser: true , useUnifiedTopology:true ,useCreateIndex:true,}).then(() => { console.log("successful db connection") }).catch((err) => { console.log(err) });
 mongoose.set('useFindAndModify', false);
+
 app.set("view engine", 'ejs');
+
 app.use(require('express-session')({
     secret: "salt",
     resave: false,
@@ -91,6 +96,26 @@ app.get('/login', isLoggedIn, function (req, res) {
     res.render('dairy',{ data: { view: false } })
 })
 app.get('/home', (req, res) => {
+    res.render('dairy', { data: { view: false } })
+
+})
+app.get('/notes', (req, res) => {
+    User.findById(req.user.id).populate(
+        {
+        path:"notes", 
+        }).exec(function (err, user) {
+        if (err) {
+            console.log(err);
+            res.render('notes', { data: { view: false } })
+
+        } else {
+            res.render('notes',{data:{view:true , result:user.notes }})
+        }
+    })
+
+})
+
+app.get('/dairy', (req, res) => {
     res.render('dairy', { data: { view: false } })
 
 })
@@ -174,7 +199,7 @@ app.post("/login", function (req, res) {
 
 app.post('/save', isLoggedIn, (req, res) => {
  
-       
+       console.log("user::",req.user);
     
     if(!req.body.title){
         console.log("title null")
@@ -209,17 +234,113 @@ app.post('/save', isLoggedIn, (req, res) => {
             myDairy.save((err)=>{
                
                 if(err){
-               console.log(err)
+               console.log("error here",err);
                 }
                 else{
                     console.log("saved successfully");
                     req.user.dairies.push(myDairy);
                     req.user.save();
-                    res.render('dairy',{data:{view:false}});
+                    res.render('dairy',{data:{view:true}});
                 }
             });
             
         }
+    
+}) 
+// to set the editing and change it to database.
+app.post('/notes/:id/update', function (req, res) {
+    console.log("in update ")
+    var note = {
+        title: req.body.title,
+        text: req.body.text,
+    };
+
+    Note.findByIdAndUpdate(req.params.id, note, function (error, updatedNote) {
+        if (error) { console.log(error); }
+        else {
+            res.redirect('/notes');
+        }
+    });
+});
+
+app.post('/notes/:id/delete', function (req, res) {
+    console.log("in delete ")
+  
+
+    Note.deleteOne({_id:req.params.id}, function (error, updatedNote) {
+        if (error) { console.log(error); }
+        else {
+            res.redirect('/notes');
+        }
+    });
+});
+
+
+// open, show each note
+app.get('/notes/:id', function (req, res) {
+    Note.findById(req.params.id, function (error, foundNote) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.render('noteedit.ejs', { note: foundNote });
+
+        }
+    });
+
+});
+app.post('/notes/add', isLoggedIn, (req, res) => {
+ 
+       console.log("body",req.body,req.user)
+    var f=1;
+    if(!req.body.title){
+        console.log("title null")
+        res.render('dairy',{data:{e1 : "please enter a title for your notes "}});
+    }
+   
+    else{
+
+        var d = Date(Date.now()); 
+        a = d.toString() 
+    var myNote =new Note({
+        
+        title: req.body.title,
+        text : req.body.text,
+        writtenby :{
+            id:req.user._id,
+            username:req.user.username,
+        },
+    });
+    
+    myNote.save((err)=>{
+               
+                if(err){
+               console.log(err)
+                }
+                else{
+                    console.log("saved successfully");
+                    req.user.notes.push(myNote);
+                    req.user.save().then(()=>
+                    {
+                        User.findById(req.user.id).populate(
+                            {
+                            path:"notes", 
+                            }).exec(function (err, user) {
+                            if (err) {
+                                console.log(err);
+                                res.render('notes', { data: { view: false } })
+                    
+                            } else {
+                                res.render('notes',{data:{view:true , result:user.notes }})
+                            }
+                        }) 
+                    })
+                             
+                    }
+            });
+            
+        }
+      
     
 }) 
 
@@ -236,7 +357,7 @@ app.post('/getone',isLoggedIn,(req,res)=>{
             console.log(err);
         } else {
 
-            res.render('alldairies', { data: { view: true, result: user.dairies } })
+            res.render('alldairies', { data: { viewone: true, result: user.dairies } })
         }
     })
     
@@ -254,6 +375,8 @@ app.get('/getall' ,isLoggedIn,(req,res)=>{
         }
     })
 })
+
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
       return next();
@@ -296,7 +419,7 @@ app.post("/newPassword", function (req, res) {
 
                 //sending email after successfully signedup
                 const mailOptions = {
-                    from: process.env.EMAIL, // sender address
+                    from: "yourwebdairy@gmail.com", // sender address
                     to: user.email, // list of receivers
                     subject: 'Password Reset link has been shared to you !', // Subject line
                     text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
@@ -360,7 +483,7 @@ app.post('/updatePassword/:token', (req, res) => {
                     }
                     else {
                         const mailOptions = {
-                            from: process.env.EMAIL, // sender address
+                            from:"yourwebdairy@gmail.com", // sender address
                             to: user.email, // list of receivers
                             subject: 'Password Updataion', // Subject line
                             text: 'Your Password for the account ' + user.username +' has been sucessfully updated \n\n'+

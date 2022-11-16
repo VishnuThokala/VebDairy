@@ -12,6 +12,9 @@ var userSchema = new Schema({
     resetPasswordExpires: { type: Number },
     dairies: [
         {type: mongoose.Schema.Types.ObjectId,ref:'Dairy'}
+    ],
+    notes: [
+        {type: mongoose.Schema.Types.ObjectId,ref:'Note'}
     ]
 }); 
 var User = module.exports = mongoose.model("User", userSchema);

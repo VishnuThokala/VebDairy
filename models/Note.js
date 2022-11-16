@@ -2,8 +2,8 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose')
 
-var DairySchema = new Schema({
-
+var NoteSchema = new Schema({
+    
     writtenby :{
         id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -17,21 +17,12 @@ var DairySchema = new Schema({
         required :true,
         
     },
-    date : {
-        type : Date ,
-        default: Date.now,
-       
-        
-    },
-    img:{
-        type:{ data: Buffer, contentType: String }
-    },
-    main : {
+    text : {
         type:String,
         required:true,
     }
 })
 
-DairySchema.plugin(passportLocalMongoose); 
-var Dairy= mongoose.model("Dairy", DairySchema);
-module.exports =Dairy; 
+NoteSchema.plugin(passportLocalMongoose); 
+var Note= mongoose.model("Note", NoteSchema);
+module.exports =Note; 

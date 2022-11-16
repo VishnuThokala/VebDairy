@@ -22,7 +22,7 @@
 
     html,
     body {
-      background: pink url(https://wallpaperaccess.com/full/2432100.jpg) ;
+      background: rgb(2, 19, 49);
     }
 
     #paper {
@@ -176,43 +176,49 @@
       font-weight: bolder;
       margin-bottom: 50px;
     }
+    h1 {
+ font-family: 'Advent Pro';
+ font-size: 22px;
+ text-align: center;
+}
   </style>
 </head>
 
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light mystyle">
-      <a class="navbar-brand" href="#">
-        <h5 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h5>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
-            <a class="nav-link" href="/home">Home </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#"> My Dairies<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Settings
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/forgotPassword">Change Password</a>
-            </div>
-          </li>
-    
-        </ul>
-        <a class="nav-link" href="/logout">Logout</a>
-    
-      </div>
-    </nav>
+  
+  <nav class="navbar navbar-expand-lg navbar-light mystyle">
+    <a class="navbar-brand" href="#"><h1 style="color:tomato"> <b>𝕎𝔼𝔹-𝔻𝔸𝕀ℝ𝕐 !</b></h1>
+  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/dairy">Write Dairy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/notes">Notes</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/get"> My Dairies <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Settings
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/forgotPassword">Change Password</a>
+          </div>
+        </li>
+        
+      </ul>
+                <a class="nav-link" href="/logout">Logout</a>
+  
+    </div>
+  </nav>
 
   <div class="container">
 
